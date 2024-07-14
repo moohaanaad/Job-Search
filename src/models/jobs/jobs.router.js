@@ -16,6 +16,6 @@ jobsRouter.get('/getCompanysJobs/:name', auth, catchError(jobsController.getComp
 jobsRouter.patch('/filterJobs', auth, validate(filterJob), catchError(jobsController.filterJobs))
 jobsRouter.post('/applyJob/:id', fileUpload({ folder: "application", allowType: fileValidation.files }).single('application'), auth, validate(applyJobSchema), catchError(jobsController.applyJob))
 jobsRouter.post('/addPdf/:id', fileUpload({ folder: "application", allowType: fileValidation.files }).single('application'), catchError(jobsController.addPdf))
-
+jobsRouter.get('/getCompany', catchError(jobsController.getJobsWithCompany))
 
 export default jobsRouter
