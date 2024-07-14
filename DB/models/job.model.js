@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 
 const JobSchema = new mongoose.Schema({
@@ -19,24 +19,24 @@ const JobSchema = new mongoose.Schema({
     seniorityLevel: {
         type: String,
         enum: ['Junior', 'Mid-Level', 'Senior', 'Team-Lead', 'CTO'],
-        required:true
+        required: true
     },
-    description:{
-        type:String,
-        required:true
+    description: {
+        type: String,
+        required: true
     },
-    technicalSkills:{
-        type:Array,
-        required:true
+    technicalSkills: {
+        type: Array,
+        required: true
     },
-    softSkills:{
-        type:Array,
-        required:true
+    softSkills: {
+        type: Array,
+        required: true
     },
-    addedBy:{
-        type:String,
-        ref:"Company",
-        required:true
+    addedBy: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 
 })
