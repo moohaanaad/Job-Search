@@ -115,3 +115,11 @@ export const addPdf = async (req, res, next) => {
     }
     next(new AppError("invaled data", 404))
 }
+
+// getJobsWithCompany
+export const getJobsWithCompany = async (req, res, next) => {
+    const result = await Job.find().populate([{ path: "addedBy", select: '_id', populate: [{ path: "company",populate:[{path:"companyHR"}] }] }])
+    console.log(result);
+    res.json({ result })
+    // result ={data of job,addedBy:{data Of user }}
+}
