@@ -24,9 +24,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    recoveryEmail:{
-        type:String,
-        required:true
+    recoveryEmail: {
+        type: String,
+        required: true
     },
     DOB: Date,
     mobileNumber: {
@@ -40,22 +40,31 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'company_HR'],
         required: true
     },
-    status:{
-        type:String,
+    status: {
+        type: String,
         enum: ['online', 'offline'],
-        default:'offline'
+        default: 'offline'
     },
-    code:{
-        type:String,
-        length:4
+    code: {
+        type: String,
+        length: 4
     },
-    profilePic:{
-        type:String,
-        required:true
-    }
+    profilePic: {
+        type: String,
+        required: true
+    },
 
+
+}, {
+    timestamps: true,
+    toJSON: { virtuals: true },//
+    toObject: { virtuals: true }// 
 })
-
+UserSchema.virtual('company', {
+    ref: 'Company',
+    localField: '_id',
+    foreignField: "companyHR"
+})
 const User = mongoose.model("User", UserSchema)
 
 export default User
